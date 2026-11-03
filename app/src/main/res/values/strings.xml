@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Monitoramento Ambiental</string>
+
+    <string name="login_titulo">Entrar</string>
+    <string name="login_subtitulo">Acesso aos projetos Muda e PSA</string>
+    <string name="login_campo_login">Login</string>
+    <string name="login_campo_senha">Senha</string>
+    <string name="login_campo_perfil">Perfil de acesso</string>
+    <string name="login_botao_entrar">Entrar</string>
+    <string name="erro_campos_obrigatorios">Preencha login e senha.</string>
+
+    <string name="boas_vindas">Olá, %1$s (%2$s)</string>
+</resources>

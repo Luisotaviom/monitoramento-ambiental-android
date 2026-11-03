@@ -11,4 +11,14 @@
     <string name="erro_campos_obrigatorios">Preencha login e senha.</string>
 
     <string name="boas_vindas">Olá, %1$s (%2$s)</string>
+    <string name="botao_indicadores">Indicadores</string>
+    <string name="lista_vazia">Nenhum item cadastrado.</string>
+
+    <string name="formulario_salvar">Salvar registro</string>
+    <string name="registro_salvo">Registro salvo na fila local.</string>
+
+    <string name="indicadores_titulo">Indicadores</string>
+    <string name="indicador_projetos">Projetos: %1$d</string>
+    <string name="indicador_registros">Registros de campo: %1$d</string>
+    <string name="indicador_status_linha">%1$s: %2$d (%3$d%%)</string>
 </resources>

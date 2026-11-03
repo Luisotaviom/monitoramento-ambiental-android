@@ -1,0 +1,9 @@
+[
+  {"id": "data_coleta", "rotulo": "Data da coleta", "tipo": "DATA", "obrigatorio": true, "opcoes": []},
+  {"id": "responsavel", "rotulo": "Responsável pela coleta", "tipo": "TEXTO", "obrigatorio": true, "opcoes": []},
+  {"id": "temperatura", "rotulo": "Temperatura da água (°C)", "tipo": "NUMERO", "obrigatorio": true, "opcoes": []},
+  {"id": "ph", "rotulo": "pH", "tipo": "NUMERO", "obrigatorio": false, "opcoes": []},
+  {"id": "condicao_tempo", "rotulo": "Condição do tempo", "tipo": "SELECAO", "obrigatorio": true,
+   "opcoes": ["Sol", "Nublado", "Chuva", "Chuva forte"]},
+  {"id": "observacoes", "rotulo": "Observações", "tipo": "TEXTO", "obrigatorio": false, "opcoes": []}
+]

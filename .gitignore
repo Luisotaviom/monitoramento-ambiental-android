@@ -1,0 +1,22 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+.kotlin/
+
+# Configuração local (caminho do SDK na sua máquina)
+local.properties
+
+# Android Studio / IntelliJ (não usados neste projeto, mas comuns)
+.idea/
+*.iml
+
+# Artefatos de build
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Sistema
+.DS_Store
+Thumbs.db

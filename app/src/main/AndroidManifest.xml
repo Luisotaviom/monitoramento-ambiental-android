@@ -33,6 +33,20 @@
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".ui.estrutura.ListaEstruturaActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.formulario.FormularioActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.indicadores.IndicadoresActivity"
+            android:exported="false"
+            android:label="@string/indicadores_titulo" />
     </application>
 
 </manifest>

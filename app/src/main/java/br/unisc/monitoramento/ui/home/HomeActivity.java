@@ -1,20 +1,25 @@
 package br.unisc.monitoramento.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.unisc.monitoramento.R;
 import br.unisc.monitoramento.data.Callback;
 import br.unisc.monitoramento.data.model.Perfil;
 import br.unisc.monitoramento.data.model.Projeto;
-import br.unisc.monitoramento.data.repository.MockProjetoRepository;
-import br.unisc.monitoramento.data.repository.ProjetoRepository;
+import br.unisc.monitoramento.data.repository.Repositorios;
 import br.unisc.monitoramento.databinding.ActivityHomeBinding;
+import br.unisc.monitoramento.ui.comum.ItemAdapter;
+import br.unisc.monitoramento.ui.comum.ItemLista;
+import br.unisc.monitoramento.ui.estrutura.ListaEstruturaActivity;
+import br.unisc.monitoramento.ui.indicadores.IndicadoresActivity;
 
 /** Tela inicial: lista de projetos Muda e PSA do usuário autenticado (AM-02). */
 public class HomeActivity extends AppCompatActivity {
@@ -23,7 +28,6 @@ public class HomeActivity extends AppCompatActivity {
     public static final String EXTRA_PERFIL = "extra_perfil";
 
     private ActivityHomeBinding binding;
-    private ProjetoRepository projetoRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +40,11 @@ public class HomeActivity extends AppCompatActivity {
         binding.textoBoasVindas.setText(getString(R.string.boas_vindas, login, perfil.getRotulo()));
 
         binding.listaProjetos.setLayoutManager(new LinearLayoutManager(this));
-        binding.listaProjetos.setAdapter(new ProjetoAdapter());
+        binding.listaProjetos.setAdapter(new ItemAdapter(this::abrirPropriedades));
 
-        projetoRepository = new MockProjetoRepository();
+        binding.botaoIndicadores.setOnClickListener(v ->
+                startActivity(new Intent(this, IndicadoresActivity.class)));
+
         carregarProjetos();
     }
 
@@ -46,11 +52,15 @@ public class HomeActivity extends AppCompatActivity {
         binding.progresso.setVisibility(View.VISIBLE);
         binding.textoErro.setVisibility(View.GONE);
 
-        projetoRepository.listarProjetos(new Callback<List<Projeto>>() {
+        Repositorios.projetos().listarProjetos(new Callback<List<Projeto>>() {
             @Override
             public void onSucesso(List<Projeto> projetos) {
                 binding.progresso.setVisibility(View.GONE);
-                ((ProjetoAdapter) binding.listaProjetos.getAdapter()).definirItens(projetos);
+                List<ItemLista> itens = new ArrayList<>();
+                for (Projeto p : projetos) {
+                    itens.add(new ItemLista(p.getId(), p.getNome(), p.getTipo().getRotulo(), p));
+                }
+                ((ItemAdapter) binding.listaProjetos.getAdapter()).definirItens(itens);
             }
 
             @Override
@@ -60,5 +70,14 @@ public class HomeActivity extends AppCompatActivity {
                 binding.textoErro.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    private void abrirPropriedades(ItemLista item) {
+        Projeto projeto = (Projeto) item.getOrigem();
+        Intent intent = new Intent(this, ListaEstruturaActivity.class);
+        intent.putExtra(ListaEstruturaActivity.EXTRA_NIVEL, ListaEstruturaActivity.Nivel.PROPRIEDADES.name());
+        intent.putExtra(ListaEstruturaActivity.EXTRA_PAI_ID, projeto.getId());
+        intent.putExtra(ListaEstruturaActivity.EXTRA_TITULO, projeto.getNome());
+        startActivity(intent);
     }
 }
